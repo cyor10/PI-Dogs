@@ -4,6 +4,8 @@ import style from '../Cards/Cards.module.css'
 import { connect } from 'react-redux';
 
 function Cards({ currentPage, dogsPerPage, dogs }) {
+
+    //Se calculan los índices de inicio y final para determinar qué perros deben mostrarse en la página
     const startIndex = (currentPage - 1) * dogsPerPage;
     const endIndex = startIndex + dogsPerPage;
     const dogsToShow = dogs.slice(startIndex, endIndex);
