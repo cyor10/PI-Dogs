@@ -12,6 +12,10 @@ const getAllDogs = async () => {
 
         // Combinar los resultados de Api y DB
         const allDogs = [...dogsFromApi, ...dogsFromDB];
+
+        // Ordenar alfabéticamente
+        allDogs.sort((a, b) => a.name.localeCompare(b.name));
+
         return allDogs
     } catch (error) {
         return { error }
