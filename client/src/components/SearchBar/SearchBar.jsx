@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import { connect } from 'react-redux';
-import { allDogs, onSearch, setPage } from '../../redux/actions';
+import { cleanFilter, onSearch, setPage } from '../../redux/actions';
 
 function SearchBar({ restart, searchByName, isLoading, currentPage, restarPage }) {
     const [name, setName] = useState('');
@@ -24,11 +24,11 @@ function SearchBar({ restart, searchByName, isLoading, currentPage, restarPage }
         <div>
             <input
                 type='search'
-                placeholder="Buscar raza"
+                placeholder="Search breed"
                 onChange={handleChange}
                 value={name} />
-            <button onClick={() => handleClick(currentPage = 1, name)} disabled={isLoading || name.trim() === ''}>{isLoading ? 'Cargando...' : 'Buscar'}</button>
-            <button onClick={() => handleRestartClick()}>Limpiar</button>
+            <button onClick={() => handleClick(currentPage = 1, name)} disabled={isLoading || name.trim() === ''}>{isLoading ? 'Loading...' : 'Search'}</button>
+            <button onClick={() => handleRestartClick()}>Clean filter</button>
         </div>
     )
 }
@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(setPage(pageNumber))
         },
         restart: function () {
-            dispatch(allDogs())
+            dispatch(cleanFilter())
         }
     }
 };

@@ -48,3 +48,7 @@
     border-radius: 40px;
     background: #987D7C;
 }
+
+.link {
+    text-decoration: none;
+}
