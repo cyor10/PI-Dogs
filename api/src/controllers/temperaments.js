@@ -11,15 +11,18 @@ const getTemperaments = async (req, res) => {
             .filter((t) => t.length > 1) // Filter remueve los temperamentos con longitud menor a uno
 
         const unique = dogsFromApi.filter((t) => t) // Remueve temperamentos repetidos de la lista
-        let tempUnico = [...new Set(unique)]
+        let tempUnique = [...new Set(unique)]
 
-        tempUnico.forEach((t) => { // Recorre y separa cada elemento de la lista 
+        tempUnique.forEach((t) => { // Recorre y separa cada elemento de la lista 
             Temperament.findOrCreate({ // Almacena cada valor en la tabla de temperamentos
                 where: { name: t }
             })
         })
         const totalTemp = await Temperament.findAll() // Recupera los elementos almacenados en la tabla
-        res.status(200).json(totalTemp) 
+
+        const sortTemp = totalTemp.sort((a, b) => a.name.localeCompare(b.name)); // Ordenar alfabéticamente
+
+        res.status(200).json(sortTemp) 
     } catch (error) {
         return res.status(500).json({ error: error.message })
     }

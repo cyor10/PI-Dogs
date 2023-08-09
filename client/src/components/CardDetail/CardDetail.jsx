@@ -45,7 +45,7 @@ export default function CardDetail() {
             <div className={styles.titleDetail}>
                 <h1 className={styles.title}>Breed detail</h1>
                 <Link to={`/home`}>
-                    <button className={styles.back}>X</button>
+                    <button className={styles.back}>✖</button>
                 </Link>
             </div>
             <div className={styles.detailContent}>
@@ -56,8 +56,8 @@ export default function CardDetail() {
                 <div className={styles.box}>
                     <h1 className={styles.titleDog}>{dog.name}</h1>
                     <h3>ID: {dog.id}</h3>
-                    <h3>Height: {dog.height}</h3>
-                    <h3>Weight: {dog.weight}</h3>
+                    <h3>Height: {dog.height} cm</h3>
+                    <h3>Weight: {dog.weight} kg</h3>
                     <h3>Temperaments: {dog.temperament}</h3>
                     <h3>Life span: {dog.life_span}</h3>
                 </div>

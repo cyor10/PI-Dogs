@@ -7,14 +7,13 @@ import validate from "./validator";
 import { createNewDog } from '../../redux/actions'
 
 export default function Form() {
-
-    // Estado para almacenar los temperamentos obtenidos desde el estado global (Redux).
+    // Constante para almacenar los temperamentos obtenidos desde el estado global (Redux).
     const temperaments = useSelector((state) => state.allTemperaments);
 
     // Función para despachar acciones al estado global.
     const dispatch = useDispatch();
 
-    // Estado para almacenar los datos del formulario.
+    // Estado local para almacenar los datos del formulario.
     const [formData, setFormData] = useState({
         image: '',
         name: '',
@@ -27,14 +26,19 @@ export default function Form() {
     });
     console.log(formData)
 
-    // Estado para almacenar los errores de validación del formulario.
+    // Estado local para almacenar los errores de validación del formulario.
     const [errors, setErrors] = useState({});
     console.log(errors)
 
+    // Estado local para decidir si hay interacción con el formulario.
+    const [formTouched, setFormTouched] = useState(false);
+
     // Efecto para actualizar los errores de validación cuando cambian los datos del formulario.
     useEffect(() => {
-        setErrors(validate(formData));
-    }, [formData]);
+        if (formTouched) {
+            setErrors(validate(formData));
+        }
+    }, [formData, formTouched]);
 
     // Manejador para los cambios en los campos del formulario.
     const handleChange = (event) => {
@@ -42,6 +46,7 @@ export default function Form() {
         const validationErrors = validate({ ...formData, [name]: value });
         setErrors(validationErrors);
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+        setFormTouched(true);
     };
 
     // Manejador para agregar o quitar temperamentos seleccionados en el dropdown.
@@ -55,7 +60,6 @@ export default function Form() {
     // Manejador para identificar temperamentos selecionados
     const handleDropdownToggle = () => {
         const dropdown = document.getElementById('temperamentsDropdown');
-        dropdown.classList.toggle(styles.open);
     };
 
     // Manejador para remover temperamentos de la lista del seleccionado
@@ -97,17 +101,20 @@ export default function Form() {
             }
             console.log(payload)
             dispatch(createNewDog(payload))
+            setFormTouched(false)
         } else {
             return alert(errors)
         }
     };
+
+    const isSubmitDisabled = Object.keys(errors).length > 0 || !formTouched;
 
     return (
         <div>
             <div className={styles.bar}>
                 <h1 className={styles.title}>Create a new breed dog</h1>
                 <Link to={`/home`}>
-                    <button className={styles.back}>X</button>
+                    <button className={styles.back}>✖</button>
                 </Link>
             </div>
             <div className={styles.new}>
@@ -134,7 +141,7 @@ export default function Form() {
                     <br />
                     <label>Mininum weight (kg): <input
                         type="number" key="weightMin" name="weightMin" onChange={handleChange}
-                        value={formData.weightMin}  /></label>
+                        value={formData.weightMin} /></label>
                     <span>{errors?.weightMin && errors.weightMin}</span>
                     <br />
                     <label>Maximun weight (kg): <input
@@ -164,20 +171,20 @@ export default function Form() {
                                         <div key={selectedId} className={styles['selected-temperament']}>
                                             {selectedTemperament.name}{' '}
                                             <button type="button" onClick={() => handleTemperamentRemove(selectedId)}>
-                                                X
+                                                ✖
                                             </button>
                                         </div>
                                     );
                                 })}
                             </div>
                         </div>
+                        <span>{errors?.temperaments && errors.temperaments}</span>
                     </label>
-                    <span>{errors?.temperaments && errors.temperaments}</span>
                     <br />
-                    {Object.keys(errors).length === 0 ? (
+                    {!isSubmitDisabled ? (
                         <button type='submit'>Send</button>
                     ) : (
-                        <span>Form contains errors</span>
+                        <span>Form is empty or contains errors</span>
                     )}
                 </form>
             </div>

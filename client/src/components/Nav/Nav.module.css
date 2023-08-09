@@ -14,8 +14,8 @@
 .nav button {
     background-color: rgba(171, 218, 225);
     cursor: pointer;
-    width: 100px;
-    height: 40px;
+    width: 90px;
+    height: 30px;
     border-radius: 10px;
     font-size: 15px;
 }

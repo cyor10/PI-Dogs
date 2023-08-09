@@ -8,10 +8,10 @@ export default function Landing() {
         <div className={style.landing}>
             <img src={dogImage} alt='Dog'></img>
             <div className={style.container}>
-                <h1>¡Esta es una web<br />hecha con amor!</h1>
-                <p>A continuación visualizaras un listado de perros,<br />procura no perder la calma con tanta ternura.</p>
+                <h1>¡This is a website<br />made with love!</h1>
+                <p>Next you will see a list of dogs,<br />Try not to lose your cool with such tenderness.</p>
                 <Link to={`/home`} className={style.link}>
-                    <button>Explorar</button>
+                    <button>Explore</button>
                 </Link>        
             </div>
         </div>

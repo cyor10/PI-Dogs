@@ -16,6 +16,12 @@
 .back {
     margin-right: 30px;
     align-self: flex-end;
+    background-color: rgba(171, 218, 225);
+    cursor: pointer;
+    width: 40px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: 15px;
 }
 
 .new {
@@ -67,10 +73,10 @@
 .selected-values {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     border-radius: 4px;
     padding: 5px;
-    min-height: 30px;
 }
 
 .selected-temperament {
@@ -82,10 +88,11 @@
     align-items: center;
     height: 25px;
     width: auto;
+    margin-right: 5px;
 }
 
 .selected-temperament button {
-    margin-left: 5px;
+    margin-right: -5px;
     cursor: pointer;
     border: none;
     background-color: transparent;
@@ -104,8 +111,4 @@
     padding: 5px;
     background-color: #fff;
     display: none;
-}
-
-#temperamentsDropdown.open {
-    display: block;
 }

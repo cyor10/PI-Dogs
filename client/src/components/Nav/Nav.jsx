@@ -17,6 +17,9 @@ export default function Nav() {
 
     return (
         <div className={style.nav}>
+            <Link to={`/`} >
+                <button>🡰</button>
+            </Link>
             <Link to={`/create`}>
                 <button>Create</button>
             </Link>
@@ -24,9 +27,6 @@ export default function Nav() {
             <Temperament />
             <Origin />
             <SearchBar />
-            <Link to={`/`} >
-                <button>X</button>
-            </Link>
         </div>
     )
 }
