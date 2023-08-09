@@ -6,10 +6,12 @@ import Cards from '../Cards/Cards'
 import Nav from '../Nav/Nav';
 import Paginator from '../Paginator/Paginator';
 
+// Hace la petición al estado global 
 export default function Home() {
     const dispatch = useDispatch();
     const dogs = useSelector((state) => state.filteredData);
 
+    //Escucha los cambios y los despacha
     useEffect(() => {
         dispatch(allDogs());
     }, [dispatch])

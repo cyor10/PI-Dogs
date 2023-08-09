@@ -55,7 +55,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 allTemperaments: payload
-            }
+            };
         case FILTER_BY_ORIGIN: { //Reducer para filtrar por origen
             const filterOrigin = payload;
             let filteredDogsData;
@@ -63,6 +63,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
             if (filterOrigin === 'all') {
                 return {
                     ...state,
+                    currentPage: 1,
                     filteredData: state.allDogs,
                 };
             }
@@ -76,6 +77,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
 
             return {
                 ...state,
+                currentPage: 1,
                 filteredData: filteredDogsData,
                 sortOrder: "asc"
             };
@@ -87,6 +89,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
             if (filterTemperament === 'all') {
                 return {
                     ...state,
+                    currentPage: 1,
                     filteredData: state.allDogs,
                 };
             }
@@ -97,10 +100,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
 
             return {
                 ...state,
+                currentPage: 1,
                 filteredData: filteredDogsData,
                 sortOrder: "asc"
             };
-        }
+        };
         case SORT_ORDER: { //Reducer para definir orden
             const newSortOrder = state.sortOrder === "asc" ? "desc" : "asc";
             const sortedList = [...state.filteredData];
@@ -117,12 +121,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
                 sortOrder: newSortOrder,
                 filteredData: sortedList,
             };
-        }
+        };
         case UPDATE_ORDER: //Reducer para actualizar orden
             return {
                 ...state,
                 sortedList: payload,
-            }
+            };
         case SET_CLEAN: //Reducer para actualizar estado de limpieza
             return {
                 ...state,
@@ -133,7 +137,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 filteredData: state.allDogs,
                 sortOrder: "asc",
-            }
+            };
         default:
             return state;
     }

@@ -5,16 +5,16 @@ import { filterByTemperament } from '../../redux/actions';
 
 
 export default function Temperament() {
-    const temperaments = useSelector((state) => state.allTemperaments);
+    const temperaments = useSelector((state) => state.allTemperaments); // Se susbcribe al estado global
     const isLoading = useSelector((state) => state.isLoading)
     const clean = useSelector((state) => state.isClean);
 
     const dispatch = useDispatch();
-    const [selectedTemperament, setSelectedTemperament] = useState("all");
+    const [selectedTemperament, setSelectedTemperament] = useState("all"); // Se define el estado local
 
         useEffect(() => {
         if (clean) {
-            setSelectedTemperament("all");
+            setSelectedTemperament("all"); // Escucha el estado global, y si es verdadero actaliza el estado local
         }
     }, [clean]);
     console.log(clean)
